@@ -1,0 +1,1584 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!-- =========== FULL CONFIGURATION FILE ================================== -->
+
+<faces-config version="2.1"
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
+
+    <!-- ___________________________________________Beans Java___________________________________________ -->
+    
+    <!-- USUARIO -->
+    <managed-bean>
+        <managed-bean-name>usuario</managed-bean-name>
+        <managed-bean-class>Beans.Usuarios.Usuario</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    
+    <!-- Idiomas-->
+    <managed-bean>
+        <managed-bean-name>idioma</managed-bean-name>
+	<managed-bean-class>Beans.Idioma.Idioma</managed-bean-class>
+	<managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    
+    <!-- Sugerencias-->
+    <managed-bean>
+        <managed-bean-name>sugerencias</managed-bean-name>
+	<managed-bean-class>Beans.Sugerencias.Sugerencias</managed-bean-class>
+	<managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    
+    <!-- Olvido contraseña-->
+    <managed-bean>
+        <managed-bean-name>olvido</managed-bean-name>
+	<managed-bean-class>Beans.Usuarios.Olvido</managed-bean-class>
+	<managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    
+    <!-- Administrador -->
+    <managed-bean>
+        <managed-bean-name>admin</managed-bean-name>
+	<managed-bean-class>Beans.Administrador.admin</managed-bean-class>
+	<managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    
+    
+    <!-- Actor -->
+    <managed-bean>
+        <managed-bean-name>actor</managed-bean-name>
+	<managed-bean-class>Beans.Serie.Actor</managed-bean-class>
+    
+	<managed-bean-scope>session</managed-bean-scope></managed-bean>
+    
+    <!-- Actor -->
+    <managed-bean>
+        <managed-bean-name>serie</managed-bean-name>
+	<managed-bean-class>Beans.Serie.Serie</managed-bean-class>
+	<managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    
+    <!--_____________ Para las RECOMENDACIONEs ______________-->
+    <managed-bean>
+        <managed-bean-name>recomendacion</managed-bean-name>
+	<managed-bean-class>Metodología.Recomendacion</managed-bean-class>
+	<managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    
+        <managed-bean>
+        <managed-bean-name>evaluacion</managed-bean-name>
+	<managed-bean-class>Metodología.Evaluacion</managed-bean-class>
+	<managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    
+
+
+    <!-- Reglas de navegación  -->
+    <!-- Pantalla inicio -->
+    <navigation-rule>
+       <!-- Registrarse  -->
+        <navigation-case>
+            <from-outcome>registro</from-outcome>
+            <to-view-id>/Usuarios/registrocuenta.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        
+        <!-- Loguearse ____________________________ -->
+        <navigation-case>
+            <from-outcome>exito</from-outcome>
+            <to-view-id>/Registrados/bienvenida.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>admin</from-outcome>
+            <to-view-id>/Administrador/adminprinc.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <!-- Botón de Aceptar al hacer login y ser INCORRECTO -->
+            <from-outcome>fallo</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+           <from-outcome>cambio</from-outcome>
+           <to-view-id>//index.xhtml</to-view-id>
+           <redirect/>
+        </navigation-case>
+    </navigation-rule>
+       
+        
+    <!-- Pantalla registro cuenta -->
+    <navigation-rule>
+        <from-view-id>/Usuarios/registrocuenta.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>exito</from-outcome>
+            <to-view-id>/Usuarios/registrocuenta.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>fallo</from-outcome>
+            <to-view-id>/Usuarios/registrocuenta.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>repetido</from-outcome>
+            <to-view-id>/Usuarios/registrocuenta.xhtml</to-view-id>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>vacio</from-outcome>
+            <to-view-id>/Usuarios/registrocuenta.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>registro</from-outcome>
+            <to-view-id>/Usuarios/registrodatospersonales.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>cancelregistro</from-outcome>
+            <to-view-id>//index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+           <from-outcome>cambio</from-outcome>
+           <to-view-id>/Usuarios/registrocuenta.xhtml</to-view-id>
+           <redirect/>
+        </navigation-case>
+
+    </navigation-rule>  
+    
+    <!-- Pantalla registro datos personales -->
+        <navigation-rule>
+        <from-view-id>/Usuarios/registrodatospersonales.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>registro</from-outcome>
+            <to-view-id>/Usuarios/registrointereses.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>cancelregistro</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>vacio</from-outcome>
+            <to-view-id>/Usuarios/registrodatospersonales.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>volver</from-outcome>
+            <to-view-id>/Usuarios/registrocuenta.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+            <navigation-case>
+                <from-outcome>cambio</from-outcome>
+                <to-view-id>/Usuarios/registrodatospersonales.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+    </navigation-rule>
+    
+    <!-- Pantalla registro intereses-->
+    <navigation-rule>
+        <from-view-id>/Usuarios/registrointereses.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>volver</from-outcome>
+            <to-view-id>/Usuarios/registrodatospersonales.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>cancelregistro</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>registro</from-outcome>
+            <to-view-id>/Registrados/bienvenida.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+           <from-outcome>cambio</from-outcome>
+           <to-view-id>/Usuarios/registrointereses.xhtml</to-view-id>
+           <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Pantalla bievenida-->
+    <navigation-rule>
+        <from-view-id>/Registrados/bienvenida.xhtml</from-view-id>
+        <!-- Ver Perfil -->
+        <navigation-case>
+            <from-outcome>perfil</from-outcome>
+            <to-view-id>/Usuarios/perfil.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Desconectar -->
+        <navigation-case>
+            <from-outcome>desconectar</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+                <from-outcome>cambio</from-outcome>
+                <to-view-id>/Registrados/bienvenida.xhtml</to-view-id>
+                <redirect/>
+        </navigation-case>
+        </navigation-rule>
+    
+    <!--  Pantalla sugerencias -->
+    <navigation-rule>
+        <from-view-id>/Invitados/sugerencias.xhtml</from-view-id>
+        <!-- Cancelar -->
+        <navigation-case>
+            <from-outcome>cancelar</from-outcome>
+            <to-view-id>//index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+            <from-outcome>cambio</from-outcome>
+            <to-view-id>/Invitados/sugerencias.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Pantalla perfil -->
+    <navigation-rule>
+        <from-view-id>/Usuarios/perfil.xhtml</from-view-id>
+        <!--Modificar-->
+        <navigation-case>
+            <from-outcome>modificar</from-outcome>
+            <to-view-id>/Usuarios/modificardatos.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!--Regresar a Bievenida-->
+        <navigation-case>
+            <from-outcome>inicio</from-outcome>
+            <to-view-id>/Registrados/bienvenida.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!--Darse de baja-->
+        <navigation-case>
+            <from-outcome>perfil</from-outcome>
+            <to-view-id>/Usuarios/baja.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+       <!-- Perfil -->
+        <navigation-case>
+            <from-outcome>perfil</from-outcome>
+            <to-view-id>/Usuarios/perfil.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!--Desconectar-->
+        <navigation-case>
+            <from-outcome>desconectar</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+            <from-outcome>cambio</from-outcome>
+            <to-view-id>/Usuarios/perfil.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Pantalla modificación perfil-->
+    <navigation-rule>
+        <from-view-id>/Usuarios/modificardatos.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>registro</from-outcome>
+            <to-view-id>/Usuarios/perfil.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>noregistro</from-outcome>
+            <to-view-id>/Usuarios/perfil.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>repetido</from-outcome>
+            <to-view-id>/Usuarios/modificardatos.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>vacio</from-outcome>
+            <to-view-id>/Usuarios/modificardatos.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+            <from-outcome>cambio</from-outcome>
+            <to-view-id>/Usuarios/modificardatos.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Perfil -->
+        <navigation-case>
+            <from-outcome>perfil</from-outcome>
+            <to-view-id>/Usuarios/modificardatos.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!--Desconectar-->
+        <navigation-case>
+            <from-outcome>desconectar</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!--_______________________ Pantalla de Baja ________________________________-->
+    <navigation-rule>
+        <from-view-id>/Usuarios/baja.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>sibaja</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>nobaja</from-outcome>
+            <to-view-id>/Usuarios/perfil.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Perfil -->
+        <navigation-case>
+            <from-outcome>perfil</from-outcome>
+            <to-view-id>/Usuarios/perfil.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!--Desconectar-->
+        <navigation-case>
+            <from-outcome>desconectar</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+            <from-outcome>cambio</from-outcome>
+            <to-view-id>/Usuarios/baja.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    
+        <!-- Catalogo series (registrados)-->
+    <navigation-rule>
+        <from-view-id>/Registrados/catalogoseries.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>desconectar</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+         <!-- Ver Perfil -->
+        <navigation-case>
+            <from-outcome>perfil</from-outcome>
+            <to-view-id>/Usuarios/perfil.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>mostrarseries</from-outcome>
+            <to-view-id>/Registrados/mostrarseries.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>mostrarseriesgen</from-outcome>
+            <to-view-id>/Registrados/mostrarseriesgen.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>cancelar</from-outcome>
+            <to-view-id>/Registrados/bienvenida.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+            <from-outcome>cambio</from-outcome>
+            <to-view-id>/Registrados/catalogoseries.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Catalogo series (Invitados)-->
+    <navigation-rule>
+        <from-view-id>/Invitados/catalogoseries.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>mostrarseries</from-outcome>
+            <to-view-id>/Invitados/mostrarseries.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>mostrarseriesgen</from-outcome>
+            <to-view-id>/Invitados/mostrarseriesgen.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>cancelar</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+            <from-outcome>cambio</from-outcome>
+            <to-view-id>/Invitados/catalogoseries.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Mostrar series (Registrados)-->
+    <navigation-rule>
+        <from-view-id>/Registrados/mostrarseries.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>desconectar</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Ver Perfil -->
+        <navigation-case>
+            <from-outcome>perfil</from-outcome>
+            <to-view-id>/Usuarios/perfil.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>serie</from-outcome>
+            <to-view-id>/Registrados/serieconcreta.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+            <from-outcome>cambio</from-outcome>
+            <to-view-id>/Registrados/mostrarseries.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Mostrar series genero(Registrados)-->
+    <navigation-rule>
+        <from-view-id>/Registrados/mostrarseriesgen.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>desconectar</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Ver Perfil -->
+        <navigation-case>
+            <from-outcome>perfil</from-outcome>
+            <to-view-id>/Usuarios/perfil.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>serie</from-outcome>
+            <to-view-id>/Registrados/serieconcreta.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+            <from-outcome>cambio</from-outcome>
+            <to-view-id>/Registrados/mostrarseriesgen.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Mostrar series genero(Invitados)-->
+    <navigation-rule>
+        <from-view-id>/Invitados/mostrarseriesgen.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>serie</from-outcome>
+            <to-view-id>/Invitados/serieconcreta.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+            <from-outcome>cambio</from-outcome>
+            <to-view-id>/Invitados/mostrarseriesgen.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    
+    <!-- Mostrar series (Invitados)-->
+    <navigation-rule>
+        <from-view-id>/Invitados/mostrarseries.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>desconectar</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>serie</from-outcome>
+            <to-view-id>/Invitados/serieconcreta.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+            <from-outcome>cambio</from-outcome>
+            <to-view-id>/Invitados/mostrarseries.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Serie concreta (registrados)-->
+    <navigation-rule>
+        <from-view-id>/Registrados/serieconcreta.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>desconectar</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>serie</from-outcome>
+            <to-view-id>/Registrados/serieconcreta.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>perfil</from-outcome>
+            <to-view-id>/Usuarios/perfil.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+            <from-outcome>cambio</from-outcome>
+            <to-view-id>/Registrados/serieconcreta.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>modificacion</from-outcome>
+            <to-view-id>/Registrados/serieconcreta.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultartemp</from-outcome>
+            <to-view-id>/Registrados/mostrartemp.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>director</from-outcome>
+            <to-view-id>/Registrados/director.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>genero</from-outcome>
+            <to-view-id>/Registrados/genero.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Serie concreta (invitados)-->
+    <navigation-rule>
+        <from-view-id>/Invitados/serieconcreta.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>serie</from-outcome>
+            <to-view-id>/Invitados/serieconcreta.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+            <from-outcome>cambio</from-outcome>
+            <to-view-id>/Invitados/serieconcreta.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>modificacion</from-outcome>
+            <to-view-id>/Invitados/serieconcreta.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultartemp</from-outcome>
+            <to-view-id>/Invitados/mostrartemp.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>director</from-outcome>
+            <to-view-id>/Invitados/director.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>genero</from-outcome>
+            <to-view-id>/Invitados/genero.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Mostrar series-->
+    <navigation-rule>
+        <from-view-id>/Registrados/seriesseguidas.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>desconectar</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>serie</from-outcome>
+            <to-view-id>/Registrados/serieconcreta.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>perfil</from-outcome>
+            <to-view-id>/Usuarios/perfil.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+            <from-outcome>cambio</from-outcome>
+            <to-view-id>/Registrados/seriesseguidas.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Mostrar temporadas-->
+    <navigation-rule>
+        <from-view-id>/Registrados/mostrartemp.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>desconectar</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>serie</from-outcome>
+            <to-view-id>/Registrados/tempconcreta.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>perfil</from-outcome>
+            <to-view-id>/Usuarios/perfil.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+            <from-outcome>cambio</from-outcome>
+            <to-view-id>/Registrados/mostrartemp.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Mostrar temporadas (invitados)-->
+    <navigation-rule>
+        <from-view-id>/Invitados/mostrartemp.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>serie</from-outcome>
+            <to-view-id>/Invitados/tempconcreta.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+            <from-outcome>cambio</from-outcome>
+            <to-view-id>/Invitados/mostrartemp.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+        <!-- Mostrar temporadas rec-->
+    <navigation-rule>
+        <from-view-id>/Registrados/Recomendacion/mostrartempsr.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>desconectar</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>serie</from-outcome>
+            <to-view-id>/Registrados/Recomendacion/tempconcretasr.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>perfil</from-outcome>
+            <to-view-id>/Usuarios/perfil.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+            <from-outcome>cambio</from-outcome>
+            <to-view-id>/Registrados/Recomendacion/mostrartempsr.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    
+    
+    <!-- Temporada concreta-->
+    <navigation-rule>
+        <from-view-id>/Registrados/tempconcreta.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>desconectar</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+            <from-outcome>cambio</from-outcome>
+            <to-view-id>/Registrados/tempconcreta.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultarcap</from-outcome>
+            <to-view-id>/Registrados/mostrarcap.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>perfil</from-outcome>
+            <to-view-id>/Usuarios/perfil.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>actor</from-outcome>
+            <to-view-id>/Registrados/actor.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Temporada concreta (invitados)-->
+    <navigation-rule>
+        <from-view-id>/Invitados/tempconcreta.xhtml</from-view-id>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+            <from-outcome>cambio</from-outcome>
+            <to-view-id>/Invitados/tempconcreta.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultarcap</from-outcome>
+            <to-view-id>/Invitados/mostrarcap.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>actor</from-outcome>
+            <to-view-id>/Invitados/actor.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Temporada concreta rec-->
+    <navigation-rule>
+        <from-view-id>/Registrados/Recomendacion/tempconcretasr.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>desconectar</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+            <from-outcome>cambio</from-outcome>
+            <to-view-id>/Registrados/Recomendacion/tempconcretasr.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultarcap</from-outcome>
+            <to-view-id>/Registrados/Recomendacion/mostrarcapsr.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>perfil</from-outcome>
+            <to-view-id>/Usuarios/perfil.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>actor</from-outcome>
+            <to-view-id>/Registrados/Recomendacion/actorsr.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Mostrar capítulos-->
+    <navigation-rule>
+        <from-view-id>/Registrados/mostrarcap.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>desconectar</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>serie</from-outcome>
+            <to-view-id>/Registrados/capconcreto.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>perfil</from-outcome>
+            <to-view-id>/Usuarios/perfil.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+            <from-outcome>cambio</from-outcome>
+            <to-view-id>/Registrados/mostrarcap.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Mostrar capítulos (invitados)-->
+    <navigation-rule>
+        <from-view-id>/Invitados/mostrarcap.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>serie</from-outcome>
+            <to-view-id>/Invitados/capconcreto.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+            <from-outcome>cambio</from-outcome>
+            <to-view-id>/Invitados/mostrarcap.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+        
+    <!-- Mostrar capítulos rec-->
+    <navigation-rule>
+        <from-view-id>/Registrados/Recomendacion/mostrarcapsr.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>desconectar</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>serie</from-outcome>
+            <to-view-id>/Registrados/Recomendacion/capconcretosr.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>perfil</from-outcome>
+            <to-view-id>/Usuarios/perfil.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+            <from-outcome>cambio</from-outcome>
+            <to-view-id>/Registrados/Recomendacion/mostrarcapsr.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+      <!-- Olvido contraseña-->
+    <navigation-rule>
+        <from-view-id>/Usuarios/olvidocontraseña.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>desconectar</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>volver</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+            <from-outcome>enviada</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Recomendacion)-->
+    <navigation-rule>
+        <from-view-id>/Registrados/Recomendacion/recomendacion.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>desconectar</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Perfil -->
+        <navigation-case>
+            <from-outcome>perfil</from-outcome>
+            <to-view-id>/Usuarios/perfil.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>serie</from-outcome>
+            <to-view-id>/Registrados/Recomendacion/serierecomendada.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>evaluarec</from-outcome>
+            <to-view-id>/Registrados/Recomendacion/evaluarrecomendacion.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>recomendacion</from-outcome>
+            <to-view-id>/Registrados/Recomendacion/mostrarrecomendaciones.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>cancelar</from-outcome>
+            <to-view-id>/Registrados/bienvenida.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+            <from-outcome>cambio</from-outcome>
+            <to-view-id>/Registrados/Recomendacion/recomendacion.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+    </navigation-rule>
+    
+        <!-- Evaluar recomendacion)-->
+    <navigation-rule>
+        <from-view-id>/Registrados/Recomendacion/evaluarrecomendacion.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>desconectar</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Perfil -->
+        <navigation-case>
+            <from-outcome>perfil</from-outcome>
+            <to-view-id>/Usuarios/perfil.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>serie</from-outcome>
+            <to-view-id>/Registrados/Recomendacion/serierecomendada.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>evaluada</from-outcome>
+            <to-view-id>/Registrados/Recomendacion/gracias.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+            <from-outcome>cambio</from-outcome>
+            <to-view-id>/Registrados/Recomendacion/evaluarrecomendacion.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+    </navigation-rule>
+    
+        <!-- Mostrar recomendaciones-->
+    <navigation-rule>
+        <from-view-id>/Registrados/Recomendacion/mostrarrecomendaciones.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>desconectar</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Perfil -->
+        <navigation-case>
+            <from-outcome>perfil</from-outcome>
+            <to-view-id>/Usuarios/perfil.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>serie</from-outcome>
+            <to-view-id>/Registrados/Recomendacion/serierecomendada.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>recomendacion</from-outcome>
+            <to-view-id>/Registrados/Recomendacion/mostrarrecomendaciones.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+            <from-outcome>cambio</from-outcome>
+            <to-view-id>/Registrados/Recomendacion/mostrarrecomendaciones.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+    </navigation-rule>
+    
+        <!-- Serie recomendada-->    
+    <navigation-rule>
+        <from-view-id>/Registrados/Recomendacion/serierecomendada.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>desconectar</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Perfil -->
+        <navigation-case>
+            <from-outcome>perfil</from-outcome>
+            <to-view-id>/Usuarios/perfil.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>serie</from-outcome>
+            <to-view-id>/Registrados/Recomendacion/serierecomendada.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+            <from-outcome>cambio</from-outcome>
+            <to-view-id>/Registrados/Recomendacion/serierecomendada.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>modificacion</from-outcome>
+            <to-view-id>/Registrados/Recomendacion/serierecomendada.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultartemp</from-outcome>
+            <to-view-id>/Registrados//Recomendacion/mostrartempsr.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>director</from-outcome>
+            <to-view-id>/Registrados/Recomendacion/directorsr.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>genero</from-outcome>
+            <to-view-id>/Registrados/Recomendacion/generosr.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>productora</from-outcome>
+            <to-view-id>/Registrados/Recomendacion/productorasr.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    
+    </navigation-rule>
+    
+    <!-- Pagina actor-->
+    <navigation-rule>
+        <from-view-id>/Registrados/actor.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>desconectar</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>serie</from-outcome>
+            <to-view-id>/Registrados/capconcreto.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>perfil</from-outcome>
+            <to-view-id>/Usuarios/perfil.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+            <from-outcome>cambio</from-outcome>
+            <to-view-id>/Registrados/actor.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Pagina Director-->
+    <navigation-rule>
+        <from-view-id>/Registrados/director.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>desconectar</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>serie</from-outcome>
+            <to-view-id>/Registrados/capconcreto.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>perfil</from-outcome>
+            <to-view-id>/Usuarios/perfil.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+            <from-outcome>cambio</from-outcome>
+            <to-view-id>/Registrados/director.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- Pagina genero-->
+    <navigation-rule>
+        <from-view-id>/Registrados/genero.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>desconectar</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>serie</from-outcome>
+            <to-view-id>/Registrados/capconcreto.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>perfil</from-outcome>
+            <to-view-id>/Usuarios/perfil.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+            <from-outcome>cambio</from-outcome>
+            <to-view-id>/Registrados/genero.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+        <!-- Pagina productora-->
+    <navigation-rule>
+        <from-view-id>/Registrados/productora.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>desconectar</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>serie</from-outcome>
+            <to-view-id>/Registrados/capconcreto.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>perfil</from-outcome>
+            <to-view-id>/Usuarios/perfil.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <!-- Cambio de IDIOMA -->
+        <navigation-case>
+            <from-outcome>cambio</from-outcome>
+            <to-view-id>/Registrados/productora.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+
+    
+    
+    
+    <!--Principal administrador-->
+        <navigation-rule>
+            <from-view-id>/Administrador/adminprinc.xhtml</from-view-id>
+            <navigation-case>
+                <from-outcome>desconectar</from-outcome>
+                <to-view-id>/index.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>nuevoserie</from-outcome>
+                <to-view-id>/Administrador/nuevaserie.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>nuevogenero</from-outcome>
+                <to-view-id>/Administrador/nuevogenero.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>nuevoproductora</from-outcome>
+                <to-view-id>/Administrador/nuevaproductora.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+             <navigation-case>
+                <from-outcome>nuevodirector</from-outcome>
+                <to-view-id>/Administrador/nuevodirector.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>nuevoactor</from-outcome>
+                <to-view-id>/Administrador/nuevoactor.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>cambio</from-outcome>
+                <to-view-id>/Administrador/cambiarcontrasena.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>eliminar</from-outcome>
+                <to-view-id>/Administrador/eliminarusuario.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>eliminarserie</from-outcome>
+                <to-view-id>/Administrador/eliminarserie.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>modificarserie</from-outcome>
+                <to-view-id>/Administrador/modificarserie.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+             <navigation-case>
+                <from-outcome>algoritmo</from-outcome>
+                <to-view-id>/Administrador/adminprinc.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+        </navigation-rule>
+        
+        <!-- Pantalla eliminar usuario -->
+        <navigation-rule>
+            <from-view-id>/Administrador/eliminarusuario.xhtml</from-view-id>
+            <!-- Desconectarse -->
+            <navigation-case>
+                <from-outcome>desconectar</from-outcome>
+                <to-view-id>/index.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>eliminar</from-outcome>
+                <to-view-id>/Administrador/adminprinc.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+        </navigation-rule>
+        
+       <!-- Cambiar contraseña de ADMINISTRADOR -->
+       <navigation-rule>
+            <from-view-id>/Administrador/cambiarcontrasena.xhtml</from-view-id>
+            <!-- Desconectarse -->
+            <navigation-case>
+                <from-outcome>desconectar</from-outcome>
+                <to-view-id>/index.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>registro</from-outcome>
+                <to-view-id>/Administrador/adminprinc.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+        </navigation-rule>
+        
+        <!-- Añadir serie -->
+        <navigation-rule>
+            <from-view-id>/Administrador/nuevaserie.xhtml</from-view-id>
+            <navigation-case>
+                <from-outcome>desconectar</from-outcome>
+                <to-view-id>/index.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>cancelar</from-outcome>
+                <to-view-id>/Administrador/adminprinc.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>añadida</from-outcome>
+                <to-view-id>/Administrador/adminprinc.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+       </navigation-rule>
+
+        <!-- Añadir director -->
+        <navigation-rule>
+            <from-view-id>/Administrador/nuevodirector.xhtml</from-view-id>
+            <navigation-case>
+                <from-outcome>desconectar</from-outcome>
+                <to-view-id>/index.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>cancelar</from-outcome>
+                <to-view-id>/Administrador/adminprinc.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>añadida</from-outcome>
+                <to-view-id>/Administrador/adminprinc.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+       </navigation-rule>
+       
+        <!-- Añadir productora -->
+        <navigation-rule>
+            <from-view-id>/Administrador/nuevaproductora.xhtml</from-view-id>
+            <navigation-case>
+                <from-outcome>desconectar</from-outcome>
+                <to-view-id>/index.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>cancelar</from-outcome>
+                <to-view-id>/Administrador/adminprinc.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>añadida</from-outcome>
+                <to-view-id>/Administrador/adminprinc.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+       </navigation-rule>
+       
+        <!-- Añadir actor -->
+        <navigation-rule>
+            <from-view-id>/Administrador/nuevoactor.xhtml</from-view-id>
+            <navigation-case>
+                <from-outcome>desconectar</from-outcome>
+                <to-view-id>/index.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>cancelar</from-outcome>
+                <to-view-id>/Administrador/adminprinc.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>añadida</from-outcome>
+                <to-view-id>/Administrador/adminprinc.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+       </navigation-rule>
+       
+        <!-- Eliminar serie -->
+        <navigation-rule>
+            <from-view-id>/Administrador/eliminarserie.xhtml</from-view-id>
+            <!-- Desconectarse -->
+            <navigation-case>
+                <from-outcome>desconectar</from-outcome>
+                <to-view-id>/index.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>volver</from-outcome>
+                <to-view-id>/Administrador/adminprinc.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+        </navigation-rule>
+        
+        <!-- Modificar serie -->
+        <navigation-rule>
+            <from-view-id>/Administrador/modificarserie.xhtml</from-view-id>
+            <!-- Desconectarse -->
+            <navigation-case>
+                <from-outcome>desconectar</from-outcome>
+                <to-view-id>/index.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>modificar</from-outcome>
+                <to-view-id>/Administrador/modificarserie2.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>cancelar</from-outcome>
+                <to-view-id>/Administrador/adminprinc.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>fallo</from-outcome>
+                <to-view-id>/Administrador/modificarserie.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+        </navigation-rule>
+        
+        <!-- Modificar serie 2 -->
+        <navigation-rule>
+            <from-view-id>/Administrador/modificarserie2.xhtml</from-view-id>
+            <!-- Desconectarse -->
+            <navigation-case>
+                <from-outcome>desconectar</from-outcome>
+                <to-view-id>/index.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>modificada</from-outcome>
+                <to-view-id>/Administrador/adminprinc.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>cancelar</from-outcome>
+                <to-view-id>/Administrador/adminprinc.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>añadirtemp</from-outcome>
+                <to-view-id>/Administrador/anadirtemp.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>eliminartemp</from-outcome>
+                <to-view-id>/Administrador/eliminartemp.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>modificartemp</from-outcome>
+                <to-view-id>/Administrador/modificartemp.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+        </navigation-rule>
+
+        <!-- Añadir temporada -->
+        <navigation-rule>
+            <from-view-id>/Administrador/anadirtemp.xhtml</from-view-id>
+            <!-- Desconectarse -->
+            <navigation-case>
+                <from-outcome>desconectar</from-outcome>
+                <to-view-id>/index.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>cancelar</from-outcome>
+                <to-view-id>/Administrador/modificarserie2.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>añadida</from-outcome>
+                <to-view-id>/Administrador/adminprinc.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+        </navigation-rule>
+
+        <!-- Eliminar temporada -->
+        <navigation-rule>
+            <from-view-id>/Administrador/eliminartemp.xhtml</from-view-id>
+            <!-- Desconectarse -->
+            <navigation-case>
+                <from-outcome>desconectar</from-outcome>
+                <to-view-id>/index.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>cancelar</from-outcome>
+                <to-view-id>/Administrador/modificarserie2.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>eliminada</from-outcome>
+                <to-view-id>/Administrador/adminprinc.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+        </navigation-rule>
+        
+        <!-- Modificar temporada -->
+        <navigation-rule>
+            <from-view-id>/Administrador/modificartemp.xhtml</from-view-id>
+            <!-- Desconectarse -->
+            <navigation-case>
+                <from-outcome>desconectar</from-outcome>
+                <to-view-id>/index.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>cancelar</from-outcome>
+                <to-view-id>/Administrador/modificarserie2.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>modificar</from-outcome>
+                <to-view-id>/Administrador/modificartemp2.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+        </navigation-rule>
+        
+        <!-- Modificar temporada -->
+        <navigation-rule>
+            <from-view-id>/Administrador/modificartemp2.xhtml</from-view-id>
+            <!-- Desconectarse -->
+            <navigation-case>
+                <from-outcome>desconectar</from-outcome>
+                <to-view-id>/index.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>cancelar</from-outcome>
+                <to-view-id>/Administrador/modificarserie2.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>modificada</from-outcome>
+                <to-view-id>/Administrador/adminprinc.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>añadircap</from-outcome>
+                <to-view-id>/Administrador/anadircapitulo.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>eliminarcap</from-outcome>
+                <to-view-id>/Administrador/eliminarcapitulo.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>modificarcap</from-outcome>
+                <to-view-id>/Administrador/modificarcapitulo.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+        </navigation-rule>
+        
+        <!-- Añadir capitulo -->
+        <navigation-rule>
+            <from-view-id>/Administrador/anadircapitulo.xhtml</from-view-id>
+            <!-- Desconectarse -->
+            <navigation-case>
+                <from-outcome>desconectar</from-outcome>
+                <to-view-id>/index.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>cancelar</from-outcome>
+                <to-view-id>/Administrador/modificarserie2.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>añadido</from-outcome>
+                <to-view-id>/Administrador/adminprinc.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+        </navigation-rule>
+        
+        <!-- Eliminar capitulo -->
+        <navigation-rule>
+            <from-view-id>/Administrador/eliminarcapitulo.xhtml</from-view-id>
+            <!-- Desconectarse -->
+            <navigation-case>
+                <from-outcome>desconectar</from-outcome>
+                <to-view-id>/index.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>cancelar</from-outcome>
+                <to-view-id>/Administrador/modificarserie2.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>volver</from-outcome>
+                <to-view-id>/Administrador/adminprinc.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+        </navigation-rule>
+        
+        <!-- Modificar capitulo -->
+        <navigation-rule>
+            <from-view-id>/Administrador/modificarcapitulo.xhtml</from-view-id>
+            <!-- Desconectarse -->
+            <navigation-case>
+                <from-outcome>desconectar</from-outcome>
+                <to-view-id>/index.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>cancelar</from-outcome>
+                <to-view-id>/Administrador/modificarserie2.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>modificar</from-outcome>
+                <to-view-id>/Administrador/modificarcapitulo2.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+        </navigation-rule>
+        
+        <!-- Modificar capitulo 2 -->
+        <navigation-rule>
+            <from-view-id>/Administrador/modificarcapitulo2.xhtml</from-view-id>
+            <!-- Desconectarse -->
+            <navigation-case>
+                <from-outcome>desconectar</from-outcome>
+                <to-view-id>/index.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>cancelar</from-outcome>
+                <to-view-id>/Administrador/modificarserie2.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+            <navigation-case>
+                <from-outcome>modificado</from-outcome>
+                <to-view-id>/Administrador/adminprinc.xhtml</to-view-id>
+                <redirect/>
+            </navigation-case>
+        </navigation-rule>
+</faces-config>
+
+    

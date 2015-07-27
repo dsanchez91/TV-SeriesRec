@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>TV-SeriesRec: Sistema de recomendación de series de televisión</title>
+    </h:head>
+    <h:body style="font-family:duepuntozero_regular; background-image: url(/TV-SeriesRec/faces/Imagenes/fondo.jpg)">
+        <h:form>
+            <style type="text/css" >
+               
+                @font-face {
+                font-family:duepuntozero_regular;
+                src: url('/TV-SeriesRec/faces/Fuentes/duepuntozero_regular.otf');}
+           
+                #acceso{
+                position:absolute;
+                top:58px;
+                left:900px;
+                font-size: 12px;
+                width:200px; }
+                
+                #barra{
+                position:absolute;
+                top:185px;
+                left:55px;
+                font-size: medium;
+                color: lightblue;
+                background: darkblue;
+                cursor:pointer;
+                margin:0 auto;
+                padding:0;
+                -moz-border-radius: 7px;
+                -webkit-border-radius : 7px;}
+        </style>
+ <!-- Titulo_-->
+           <h1 style="font-family:duepuntozero_regular;position:absolute; font-size:60px; color:darkblue; top:10px; left:60px;">TV-SeriesRec</h1>
+           <h2 style="font-family:duepuntozero_regular;position:absolute; font-size: x-large; color:darkblue; top:90px; left:100px;">#{idioma.catalogo}</h2>
+ 
+            
+           
+            <!-- Idiomas -->
+           <table id="idiomas">
+               <td>
+                   <img alt="" src="/TV-SeriesRec/faces/Imagenes/iconoespanol.png" width="20"/>
+                   <h:commandButton action="#{idioma.cambiarespañol}" value="#{idioma.seleccionidiomaesp}" style="background:transparent; border:transparent;font-size:12px; color:darkslategray; cursor:pointer;"/>
+               </td>
+               <td>
+                   <img alt="" src="/TV-SeriesRec/faces/Imagenes/iconoingles.png" width="20"/>
+                   <h:commandButton action="#{idioma.cambiaringles}" value="#{idioma.seleccionidiomaing}" style="background:transparent; border:transparent;font-size:12px; color:darkslategray; cursor:pointer; "/>
+               </td>
+           
+              <!-- Contacto -->
+              <td>
+                <a href="/TV-SeriesRec/faces/Invitados/sugerencias.xhtml" style="color:black;position:relative;top:-2px;left:800px;font-size:14px;cursor:pointer;">#{idioma.contacto}</a>
+              </td>
+           
+           </table>
+            
+       
+            
+         <!--____________________________________  Acceso de Usuarios  __________________________________-->
+        <table style=" position:absolute;top:50px;left:890px;width:200px; height:95px; background-color:blue; opacity:.40;filter:alpha(opacity=40);-moz-opacity:.40;"/>
+        <table id="acceso">
+                <!-- Imagen de usuario -->
+                <tr><td><img alt="" width="30px" height="30px" src="/TV-SeriesRec/faces/Imagenes/user.jpg"/></td></tr>
+
+        </table>
+        
+        <table style="position:absolute;top:56px;left:940px;font-size: 12px;">
+        <tr><td style="font-size: xx-large;"><h:outputText value="#{usuario.identificador}"/></td></tr>
+        </table> 
+        <table style="position:absolute;top:110px;left:915px;font-size: 12px;">
+            <td><!-- Desconectarse -->
+                    <h:commandButton style=" font-size: x-small; color:blue;" value="#{idioma.miperfil}" action="#{usuario.perfil}"/>
+            </td>
+            <td><!-- Perfil -->
+                   <h:commandButton style="font-size: x-small; color: blue;" value="#{idioma.desconectarse}" action="#{usuario.desconectar}"/>
+            </td>
+        </table>
+        
+       
+        <!-- Barra de Acceso Rapido -->
+        <table id="barra" border="1px">
+            <!-- Inicio -->
+            <td style="border-right-color:lightblue; border-bottom-style: none; border-top-style: none; border-left-style: none; " width="110" align="center"><a style="text-decoration: none; color:#ccffff" href="/TV-SeriesRec/faces/Registrados/bienvenida.xhtml">#{idioma.inicio}</a></td>
+            <!-- Busca -->
+            <td style="border-right-color:lightblue; border-bottom-style: none; border-top-style: none; border-left-style: none; " width="300" align="center"><a style="text-decoration: none; color:#ccffff" href="/TV-SeriesRec/faces/Registrados/catalogoseries.xhtml">#{idioma.busca}</a></td>
+            <!-- Mis series -->
+            <td style="border-right-color:lightblue; border-bottom-style: none; border-top-style: none; border-left-style: none; " width="200" align="center"><a style="text-decoration: none; color:#ccffff" href="/TV-SeriesRec/faces/Registrados/seriesseguidas.xhtml">#{idioma.misseries}</a></td>
+             <!-- Recomendación -->
+            <td style="border-right-color:lightblue; border-bottom-style: none; border-top-style: none; border-left-style: none; " width="200" align="center"><a style="text-decoration: underline; color:#00ffff" href="/TV-SeriesRec/faces/Registrados/Recomendacion/recomendacion.xhtml">#{idioma.recomendacion}</a></td>
+              <!-- Guia -->
+            <td style="border-right-color:lightblue; border-bottom-style: none; border-top-style: none; border-left-style: none; " width="200" align="center"><a style="text-decoration: none; color:#ccffff" href="/TV-SeriesRec/faces/Registrados/guia.xhtml">#{idioma.guia}</a></td>
+        </table>
+        
+         <!-- Tabla fondo  -->
+        <table style="background-color:lightblue; opacity:.60;filter:alpha(opacity=60);-moz-opacity:.60;position:absolute;top:260px;left:120px;width:680px;height:600px;-moz-border-radius:7px;-webkit-border-radius:7px;"/>
+     
+
+        
+        <!-- Datos -->
+        <f:view>
+            <table style="width:300px;font-size:13px;position:absolute;left:150px;top:280px">
+                <td>
+                <div style="overflow:auto;width:630px;height:600px;">
+                <img style="position:absolute;left:443px;top:0px" alt="" src="/TV-SeriesRec/faces/ImagenSeries/#{serie.detallesproductora.nombre}.jpg" width="200px" height="120px"/>
+                <h2 style="color:darkblue;">#{idioma.nombre}:</h2>
+                <h:outputLabel style="font-size:xx-large; font-weight:800;  color:darkolivegreen;" value="#{recomendacion.detallesproductora.nombre}"/>
+
+                <h2 style="color:darkblue;">#{idioma.descripcionn}:</h2>
+                <h:outputLabel style="font-size:medium; color:blue;" value="#{recomendacion.detallesproductora.descripcion}"/>
+                
+                </div>
+                </td>
+             </table>      
+        </f:view>
+        
+
+
+      </h:form>
+    </h:body>
+</html>
+

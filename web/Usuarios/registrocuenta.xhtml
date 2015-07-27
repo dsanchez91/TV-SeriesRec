@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>TV-SeriesRec: Sistema de recomendación de series de televisión</title>
+    </h:head>
+    <h:body style="font-family:duepuntozero_regular; background-image: url(/TV-SeriesRec/faces/Imagenes/fondo.jpg)">
+        <h:form>
+                <style type="text/css" >
+               
+                @font-face {
+                font-family:duepuntozero_regular;
+                src: url('/TV-SeriesRec/faces/Fuentes/duepuntozero_regular.otf');} 
+            
+                </style>
+                
+                <!-- Titulo _-->
+                <h1 style="font-family:duepuntozero_regular;position:absolute; font-size:60px; color:darkblue; top:10px; left:60px;">TV-SeriesRec</h1>
+                <h2 style="font-family:duepuntozero_regular;position:absolute; font-size: x-large; color:darkblue; top:90px; left:100px;">#{idioma.registro}</h2>
+
+                <!-- Idiomas -->
+                <table id="idiomas">
+                <td>
+                   <img alt="" src="/TV-SeriesRec/faces/Imagenes/iconoespanol.png" width="20"/>
+                   <h:commandButton action="#{idioma.cambiarespañol}" value="#{idioma.seleccionidiomaesp}" style="background:transparent; border:transparent;font-size:12px; color:darkslategray; cursor:pointer;"/>
+                </td>
+                <td>
+                   <img alt="" src="/TV-SeriesRec/faces/Imagenes/iconoingles.png" width="20"/>
+                   <h:commandButton action="#{idioma.cambiaringles}" value="#{idioma.seleccionidiomaing}" style="background:transparent; border:transparent;font-size:12px; color:darkslategray; cursor:pointer; "/>
+                </td>
+           
+                 <!-- Contacto -->
+                 <td>
+                <a href="/TV-SeriesRec/faces/Invitados/sugerencias.xhtml" style="color:black;position:relative;top:-2px;left:800px;font-size:14px;cursor:pointer;">#{idioma.contacto}</a>
+                 </td>
+           
+                </table>
+                <!-- Tabla fondo -->
+                <table style="background-color:lightblue; opacity:.60;filter:alpha(opacity=60);-moz-opacity:.60;position:absolute;top:180px;left:150px;width:700px;height:380px;-moz-border-radius:7px;-webkit-border-radius:7px;"/>
+                
+                <!-- Datos cuenta -->
+                <table style="font-family: duepuntozero_regular;position:absolute;top:200px;left:220px;width:355px;height:280px;">
+                    <tr><td>#{idioma.usuario}:</td></tr>
+                    <tr><td><h:inputText value="#{usuario.identificador}"/></td>
+                        <td><h:commandButton style="font-family: duepuntozero_regular;font-size: small; color: darkblue;" value="#{idioma.estaocupado}" action="#{usuario.comprobaridentificador}"/></td>
+                        <td><img alt=""  width="30" height="30" src="/TV-SeriesRec/faces/Imagenes/#{usuario.valido}"/></td>
+                    </tr>
+                    <tr><td>#{idioma.contraseña}:<h:inputSecret value="#{usuario.contraseña}"/></td></tr>
+                    <tr><td>#{idioma.repetircontraseña}:<h:inputSecret value="#{usuario.contraseñaaux}"/></td></tr>
+                    <tr><td>eMail:</td></tr>
+                    <tr><td><h:inputText value="#{usuario.datosPersonales.email}"/></td></tr>
+                </table>
+                
+                <!-- Imagen Usuario -->
+                <table style ="position:absolute;top:220px;left:700px;">
+                    <tr>
+                    <td><img alt="" width="100" height="100" src="/TV-SeriesRec/faces/Imagenes/user.jpg"/></td>
+                   </tr>
+                </table>
+                
+               <!-- Botones siguiente y cancelar -->
+                <table style ="position:absolute;top:510px;left:375px;;font-size:medium;">
+                    <td>
+                        <h:commandButton style="font-size:small;color:darkblue;" value="#{idioma.siguiente}" action="#{usuario.formulario.comprobarcamposcuenta}"/>
+                        <h:commandButton style ="font-size: small; color: darkblue;" value="#{idioma.cancelarregistro}" action="cancelregistro"/>
+                    </td>
+                </table>
+               <!-- Aviso de algo incorrecto -->
+               <h:outputLabel style="font-size:medium;color:red;width:300px;position:absolute;top:400px;left:540px;" value="#{usuario.formulario.aviso}"/>
+        </h:form>
+    </h:body>
+</html>
+

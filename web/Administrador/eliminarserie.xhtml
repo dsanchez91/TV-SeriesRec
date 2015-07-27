@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>TV-SeriesRec: Sistema de recomendación de series de televisión</title>
+    </h:head>
+    <h:body style="font-family:duepuntozero_regular; background-image: url(/TV-SeriesRec/faces/Imagenes/fondo.jpg)">
+       <h:form rendered="#{empty usuario.identificador}">
+            <table style="background-color:darkblue;opacity:.70;filter:alpha(opacity=70);-moz-opacity:.70;position:absolute;top:180px;left:200px;width:640px;height:100px;"/>
+            <h:outputLabel style="width:400px;color:white;position:absolute;top:200px;left:240px;" value="#{idioma.accesofunc}"/>
+            <h:commandButton style="color:white;position:absolute;left:700px;top:230px;" action="desconectar" value="#{idioma.identificarse}"/>
+       </h:form>
+        
+        <style type="text/css" >
+               @font-face {
+                font-family:duepuntozero_regular;
+                src: url('/TV-SeriesRec/faces/Fuentes/duepuntozero_regular.otf');}
+       </style>
+       
+       <f:view>
+            <h:form rendered="#{not empty usuario.identificador}" >
+                 <!-- Fondo tabla -->
+                <table style="background-color: lightblue;opacity:.70;filter:alpha(opacity=70);-moz-opacity:.70; border-style:solid; position: absolute; top: 150px; left:130px; width:960px; height: 650px;"/>
+               
+                <!-- Titulo_-->
+                <h1 style="font-family:duepuntozero_regular;position:absolute; font-size:60px; color:darkblue; top:10px; left:60px;">TV-SeriesRec</h1>
+                <h2 style="font-family:duepuntozero_regular;position:absolute; font-size: x-large; color:darkblue; top:90px; left:100px;">Administrador</h2>
+                
+                <!-- Desconectarse -->
+                <td><h:commandButton style=" font-size: x-small; color:blue;position:absolute;top:240px;left:960px;" value="Desconectarse" action="#{usuario.desconectar}"/></td>
+                
+                <h:outputText style="font-size:15px;width:400px;position:absolute;top:200px;left:410px;" value="Introduzca el título de la serie a eliminar:"/>
+                <h:inputText style="font-size:15px;width:200px;position:absolute;top:240px;left:420px;" value="#{admin.serieeliminar}"/>
+                <h:commandButton style="position:absolute;top:300px;left:430px;font-size:small;color:blue;" value="Eliminar" action="#{admin.eliminarserie}"/>
+                <h:commandButton style="position:absolute;top:300px;left:500px;font-size:small;color:blue;" value="Cancelar" action="eliminar"/>
+                
+                
+                
+                
+             </h:form>
+        </f:view>
+    </h:body>
+</html>
+

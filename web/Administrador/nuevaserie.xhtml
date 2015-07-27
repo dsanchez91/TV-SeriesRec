@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>TV-SeriesRec: Sistema de recomendación de series de televisión</title>
+    </h:head>
+    <h:body style="font-family:duepuntozero_regular; background-image: url(/TV-SeriesRec/faces/Imagenes/fondo.jpg)">
+       <h:form rendered="#{empty usuario.identificador}">
+            <table style="background-color:darkblue;opacity:.70;filter:alpha(opacity=70);-moz-opacity:.70;position:absolute;top:180px;left:200px;width:640px;height:100px;"/>
+            <h:outputLabel style="width:400px;color:white;position:absolute;top:200px;left:240px;" value="#{idioma.accesofunc}"/>
+            <h:commandButton style="color:white;position:absolute;left:700px;top:230px;" action="desconectar" value="#{idioma.identificarse}"/>
+       </h:form>
+        
+      <style type="text/css" >
+               @font-face {
+                font-family:duepuntozero_regular;
+                src: url('/TV-SeriesRec/faces/Fuentes/duepuntozero_regular.otf');}
+      </style>
+      
+         <f:view>
+            <h:form rendered="#{not empty usuario.identificador}" >
+                <!-- Fondo tabla -->
+                <table style="background-color: lightblue;opacity:.70;filter:alpha(opacity=70);-moz-opacity:.70; border-style:solid; position: absolute; top: 150px; left:130px; width:960px; height: 650px;"/>
+               
+                <!-- Titulo_-->
+                <h1 style="font-family:duepuntozero_regular;position:absolute; font-size:60px; color:darkblue; top:10px; left:60px;">TV-SeriesRec</h1>
+                <h2 style="font-family:duepuntozero_regular;position:absolute; font-size: x-large; color:darkblue; top:90px; left:100px;">Administrador</h2>
+                >
+                <!-- Desconectarse -->
+                <td><h:commandButton style=" font-size: x-small; color:blue;position:absolute;top:240px;left:960px;" value="Desconectarse" action="#{usuario.desconectar}"/></td>
+    
+                <!-- Añadir serie -->
+                <h2 style="font-family:duepuntozero_regular;position:absolute; font-size:large; color:darkolivegreen; top:170px; left:160px;">Rellene los datos de la nueva serie:</h2>
+                <table style="position:absolute;top:220px;left:210px;width:300px;height:330px;">
+                    <tr><td>Título:</td>
+                        <td><h:inputText value="#{admin.titulo}"/></td>
+                    </tr>
+                    <tr><td>Productora:</td>
+                        <h:column>
+                            <td><h:selectOneMenu value="#{admin.productora}" >
+                                <f:selectItems itemValue="#{vector.nombre}" var="lista" value="#{admin.identificadorprod}" itemLabel="#{vector.nombre}"/>
+                            </h:selectOneMenu></td>
+                        </h:column>
+                    </tr>
+                    <tr><td>Año:</td>
+                        <td><h:inputText value="#{admin.año}"/></td>
+                    </tr>
+                    <tr><td>País:</td>
+                        <td><h:inputText value="#{admin.país}"/></td>
+                    </tr>
+                    <tr><td>Idioma:</td>
+                        <td><h:inputText value="#{admin.idioma}"/></td>
+                    </tr>
+                    <tr><td>Fecha inicio serie:</td>
+                        <td><h:inputText value="#{admin.fechainicio}"/></td>
+                    </tr>              
+                    <tr><td>Fecha fin serie:</td>
+                        <td><h:inputText value="#{admin.fechafin}"/></td>
+                    </tr>     
+                    <tr><td>Género:</td>
+                        <td><h:selectOneMenu value="#{admin.genero}">
+                                    <f:selectItem itemValue="Acción" itemLabel="Acción"/>
+                                    <f:selectItem itemValue="Ciencia ficción" itemLabel="Ciencia ficción"/>
+                                    <f:selectItem itemValue="Comedia" itemLabel="Comedia"/>
+                                    <f:selectItem itemValue="Drama" itemLabel="Drama"/>
+                                    <f:selectItem itemValue="Infantil" itemLabel="Infantil"/>
+                                    <f:selectItem itemValue="Intriga" itemLabel="Intriga"/>
+                                    <f:selectItem itemValue="Histórica" itemLabel="Histórica"/>
+                                    <f:selectItem itemValue="Romance" itemLabel="Romance"/>
+                                    <f:selectItem itemValue="Terror" itemLabel="Terror"/>
+                            </h:selectOneMenu></td>
+                    </tr>
+                    
+                    <tr><td>Director:</td>
+                           <h:column>
+                               <td><h:selectOneMenu value="#{admin.directornombre}" >
+                                    <f:selectItems itemValue="#{vector.nombre}" var="lista" value="#{admin.identificadordir}" itemLabel="#{vector.nombre}"/>
+                               </h:selectOneMenu></td>
+                           </h:column>
+                    </tr>                    
+                
+                </table>
+                
+                <h:commandButton style="position:absolute;top:550px;left:510px;font-size:small;color:blue;" value="Aceptar" action="#{admin.nuevaserie}"/>
+                <h:commandButton style="position:absolute;top:550px;left:590px;font-size:small;color:blue;" value="Cancelar" action="cancelar"/>
+            </h:form>
+        </f:view>                    
+   </h:body>
+</html>
+
